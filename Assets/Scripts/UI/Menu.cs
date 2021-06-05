@@ -3,14 +3,11 @@
 namespace Archaeologist.UI.Menu
 {
     using Core;
+    using Utils;
 
     public class Menu : MonoBehaviour
     {
         [SerializeField] GameObject exitPanel = null;
-
-        [Header("Scenes")]
-        [SerializeField] string nameSeneGame = "Game";
-        [SerializeField] string nameSceneAbout = "About";
 
         private void Awake()
         {
@@ -21,20 +18,17 @@ namespace Archaeologist.UI.Menu
         private void Update()
         {
             if (Input.GetButtonDown("Cancel"))
-            {
-                Debug.Log(1);
                 OnCancenButtonPressed();
-            }
         }
 
         public void StartGame()
         {
-            Game.LoadScene(nameSeneGame);
+            Game.LoadScene(SceneNames.Game);
         }
 
         public void ShowAbout()
         {
-            Game.LoadScene(nameSceneAbout);
+            Game.LoadScene(SceneNames.About);
         }
 
         public void ToggleExitPanel()

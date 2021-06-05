@@ -301,5 +301,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: AboutMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 6150188945186248559, guid: 038767282e10fd8458337719dcddedfa, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.54901963
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150188946019211442, guid: 038767282e10fd8458337719dcddedfa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150188946230507665, guid: 038767282e10fd8458337719dcddedfa, type: 3}
+      propertyPath: m_fontStyle
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150188946246117197, guid: 038767282e10fd8458337719dcddedfa, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4291556594
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 038767282e10fd8458337719dcddedfa, type: 3}

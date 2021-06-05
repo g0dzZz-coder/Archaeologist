@@ -5,42 +5,16 @@ using UnityEngine;
 namespace Archaeologist.Core
 {
     using UI;
+    using Utils;
 
     public static class Game
     {
-        public static bool IsPaused { get; private set; }
-        public static bool IsGameOver { get; private set; }
-
-        public static Action SceneChanged { get; set; }
+        public static event Action SceneChanged;
 
         [RuntimeInitializeOnLoadMethod]
         public static void Init()
         {
-            LoadScene("Menu");
-            UnPause();
-        }
-
-        public static void GameOver()
-        {
-            IsGameOver = true;
-        }
-
-        public static void RestartGame()
-        {
-            UnPause();
-        }
-
-        public static void UnPause()
-        {
-            Time.timeScale = 1;
-            IsPaused = false;
-            IsGameOver = false;
-        }
-
-        public static void Pause()
-        {
-            Time.timeScale = 0;
-            IsPaused = true;
+            LoadScene(SceneNames.Menu);
         }
 
         public static void Exit()
@@ -48,7 +22,6 @@ namespace Archaeologist.Core
 #if UNITY_EDITOR
             EditorApplication.ExitPlaymode();
 #endif
-
             Application.Quit();
         }
 

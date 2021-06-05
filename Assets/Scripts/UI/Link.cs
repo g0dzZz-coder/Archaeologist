@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Archaeologist.UI
 {
-    public class Link : MonoBehaviour
+    public class Link : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField]
-        private string url = "";
+        [SerializeField] string url = string.Empty;
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            OpenUrl();
+        }
 
         public void OpenUrl()
         {

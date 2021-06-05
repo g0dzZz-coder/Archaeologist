@@ -1,115 +1,101 @@
 ﻿using DG.Tweening;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Archaeologist.UI
 {
     using Core;
+    using Gameplay;
+    using Utils;
 
     public class UIManager : MonoBehaviour
     {
-        [Header("Stats")]
-        [SerializeField] TextMeshProUGUI textScore = null;
-        [SerializeField] TextMeshProUGUI textHearts = null;
-
-        [Header("Panels")]
-        [SerializeField] GameObject pausePanel = null;
-        [SerializeField] GameObject winPanel = null;
-        [SerializeField] GameObject losePanel = null;
-
-        [Header("Scenes")]
-        [SerializeField] string nameMenuScene = "Menu";
-
-        [Header("Other")]
-        [SerializeField] float durationAnim = 0.2f;
+        [SerializeField] MatchController matchController = null;
+        [SerializeField] GameObject victoryPanel = null;
+        [SerializeField] GameObject defeatPanel = null;
         [SerializeField] GameObject imageButtonRestart = null;
+        [SerializeField] float animationDuration = 0.2f;
 
-        private void Update()
+        private GameObject lastPanel;
+
+        private void Awake()
         {
-            if (Input.GetButtonDown("Cancel"))
-                Pause();
-        }
+            victoryPanel.SetActive(false);
+            defeatPanel.SetActive(false);
 
-        public void Init(int startLives, int startScore)
-        {
-            pausePanel.SetActive(false);
-            winPanel.SetActive(false);
-            losePanel.SetActive(false);
-
-            UpdateStatsUI(startLives, startScore);
-        }
-
-        public void UpdateStatsUI(int newHearts, int newScore)
-        {
-            textHearts.text = newHearts.ToString();
-            textScore.text = newScore.ToString();
-        }
-
-        public void Pause()
-        {
-            ShowPanel(pausePanel);
-
-            if (Game.IsPaused)
-            {
-                UnPause();
-                return;
-            }
-
-            Game.Pause();
-        }
-
-        public void UnPause()
-        {
-            StartCoroutine(HidePanel(pausePanel));
-
-            Game.UnPause();
+            matchController.MatchEnded += ShowEndMatchPanel;
         }
 
         public void Restart()
         {
-            RotateRestartButton(durationAnim);
+            HideLastPanel();
+            RotateRestartButton(animationDuration);
 
-            Game.RestartGame();
-        }
-
-        public void ShowGameOverPanel(bool win)
-        {
-            if (win)
-                ShowPanel(winPanel);
-            else
-                ShowPanel(losePanel);
+            matchController.Restart();
         }
 
         public void BackToMenu()
         {
-            UnPause();
+            Game.LoadScene(SceneNames.Menu);
+        }
 
-            Game.LoadScene(nameMenuScene);
+        public void HideLastPanel()
+        {
+            if (lastPanel == null)
+                return;
+
+            HidePanel(lastPanel);
+        }
+
+        private void ShowEndMatchPanel(bool win)
+        {
+            if (win)
+                ShowPanel(victoryPanel);
+            else
+                ShowPanel(defeatPanel);
+        }
+
+        private void ShowPanel(GameObject panel)
+        {
+            if (panel == null)
+                return;
+
+            if (panel.TryGetComponent(out Image image))
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, 0f);
+                image.raycastTarget = true;
+                image.DOFade(1f, animationDuration);
+            }
+
+            panel.SetActive(true);
+            lastPanel = panel;
+        }
+
+        private IEnumerator HidePanel(GameObject panel)
+        {
+            if (panel)
+            {
+                if (panel.TryGetComponent(out Image image))
+                {
+                    image.DOFade(0f, animationDuration);
+                    image.raycastTarget = false;
+
+                    yield return new WaitForSeconds(animationDuration);
+                }
+                else
+                {
+                    yield return new WaitForSeconds(0f);
+                }
+
+                panel.SetActive(false);
+            }
         }
 
         private void RotateRestartButton(float duration)
         {
             var endValue = new Vector3(0, 0, imageButtonRestart.transform.rotation.eulerAngles.z - 720);
             imageButtonRestart.transform.DORotate(endValue, duration);
-        }
-
-        private void ShowPanel(GameObject panel)
-        {
-            panel.SetActive(true);
-            DOTween.Sequence()
-                .Append(panel.GetComponent<Image>().DOFade(1f, durationAnim));
-        }
-
-        private IEnumerator HidePanel(GameObject panel)
-        {
-            DOTween.Sequence()
-                   .Append(panel.GetComponent<Image>().DOFade(0f, durationAnim));
-
-            yield return new WaitForSeconds(0f);
-
-            panel.SetActive(false);
         }
     }
 }
