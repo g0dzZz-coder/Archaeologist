@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 
 namespace Archaeologist.Core
 {
-    using UI;
     using Utils;
 
     public static class Game
     {
+        public static event Action<string> SceneChanging;
         public static event Action SceneChanged;
 
         [RuntimeInitializeOnLoadMethod]
@@ -34,7 +34,7 @@ namespace Archaeologist.Core
             if (string.IsNullOrWhiteSpace(nameScene))
                 return;
 
-            SceneChanger.FadeToLevel(nameScene);
+            SceneChanging?.Invoke(nameScene);
 
             SceneChanged?.Invoke();
         }

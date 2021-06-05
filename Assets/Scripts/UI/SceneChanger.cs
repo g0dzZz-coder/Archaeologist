@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 namespace Archaeologist.UI
 {
+    using Core;
+
     [RequireComponent(typeof(Animator))]
     public class SceneChanger : MonoBehaviour
     {
@@ -15,7 +17,17 @@ namespace Archaeologist.UI
             Animator = GetComponent<Animator>();
         }
 
-        public static void FadeToLevel(string newScene)
+        private void OnEnable()
+        {
+            Game.SceneChanging += FadeToLevel;
+        }
+
+        private void OnDisable()
+        {
+            Game.SceneChanging -= FadeToLevel;
+        }
+
+        public void FadeToLevel(string newScene)
         {
             SceneToLoad = newScene;
 
