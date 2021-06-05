@@ -22,7 +22,7 @@ namespace Archaeologist.Gameplay
         [Range(0f, 1f)]
         [SerializeField] float treasureSpawnRate = 0.1f;
 
-        public bool IsPlayerCanDig => Player.Shovels > 0;
+        private bool IsPlayerCanDig => Player.Shovels > 0;
 
         private readonly List<Cell> cells = new List<Cell>();
         private readonly List<Treasure> treasures = new List<Treasure>();
@@ -42,7 +42,7 @@ namespace Archaeologist.Gameplay
             controller.MatchRestarted -= Init;
         }
 
-        public void Init()
+        private void Init()
         {
             Clear();
             Fill();
@@ -113,10 +113,7 @@ namespace Archaeologist.Gameplay
 
         private bool IsTreasureNeedsToBeSpawned()
         {
-            if (Random.Range(0f, 1f) < treasureSpawnRate)
-                return true;
-
-            return false;
+            return Random.Range(0f, 1f) < treasureSpawnRate;
         }
     }
 }

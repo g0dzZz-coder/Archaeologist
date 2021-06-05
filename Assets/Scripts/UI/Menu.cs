@@ -18,7 +18,7 @@ namespace Archaeologist.UI.Menu
         private void Update()
         {
             if (Input.GetButtonDown("Cancel"))
-                OnCancenButtonPressed();
+                OnCancelButtonPressed();
         }
 
         public void StartGame()
@@ -41,7 +41,7 @@ namespace Archaeologist.UI.Menu
             Game.Exit();
         }
 
-        private void OnCancenButtonPressed()
+        private void OnCancelButtonPressed()
         {
             if (exitPanel.activeSelf)
                 ConfirmExit();

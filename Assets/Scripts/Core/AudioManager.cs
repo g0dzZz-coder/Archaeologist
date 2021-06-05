@@ -5,7 +5,6 @@ namespace Archaeologist.Core
     public class AudioManager
     {
         public static float Volume { get; set; } = 1f;
-        public static AudioClip ClickSound { get; private set; }
 
         [RuntimeInitializeOnLoadMethod()]
         private void Init()

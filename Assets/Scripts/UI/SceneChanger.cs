@@ -7,7 +7,8 @@ namespace Archaeologist.UI
     public class SceneChanger : MonoBehaviour
     {
         private static Animator Animator = null;
-        private static string SceneToLoad = "";
+        private static string SceneToLoad = string.Empty;
+        private static readonly int FadeOut = Animator.StringToHash("FadeOut");
 
         private void Awake()
         {
@@ -21,7 +22,7 @@ namespace Archaeologist.UI
             if (Animator == null)
                 return;
 
-            Animator.SetTrigger("FadeOut");
+            Animator.SetTrigger(FadeOut);
         }
 
         public void OnFadeComplete()

@@ -40,7 +40,7 @@ namespace Archaeologist.UI
             Game.LoadScene(SceneNames.Menu);
         }
 
-        public void HideLastPanel()
+        private void HideLastPanel()
         {
             if (lastPanel == null)
                 return;
@@ -50,10 +50,7 @@ namespace Archaeologist.UI
 
         private void ShowEndMatchPanel(bool win)
         {
-            if (win)
-                ShowPanel(victoryPanel);
-            else
-                ShowPanel(defeatPanel);
+            ShowPanel(win ? victoryPanel : defeatPanel);
         }
 
         private void ShowPanel(GameObject panel)

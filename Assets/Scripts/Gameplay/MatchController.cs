@@ -21,14 +21,14 @@ namespace Archaeologist.Gameplay
             MatchRestarted?.Invoke();
         }
 
-        public void Finish(bool win = false)
-        {
-            MatchEnded?.Invoke(win);
-        }
-
         public void Restart()
         {
             MatchRestarted?.Invoke();
+        }
+        
+        private void Finish(bool win = false)
+        {
+            MatchEnded?.Invoke(win);
         }
 
         private void OnMatchRestarted()

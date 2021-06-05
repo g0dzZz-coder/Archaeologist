@@ -45,7 +45,7 @@ namespace Archaeologist.Gameplay
             ResetPosition();
         }
 
-        public void ResetPosition()
+        private void ResetPosition()
         {
             transform.localPosition = dragStartPosition;
         }
