@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Archaeologist.Core
 {
@@ -27,6 +28,9 @@ namespace Archaeologist.Core
 
         public static void LoadScene(string nameScene)
         {
+            if (nameScene == SceneManager.GetActiveScene().name)
+                return;
+
             if (string.IsNullOrWhiteSpace(nameScene))
                 return;
 

@@ -61,11 +61,11 @@ namespace Archaeologist.UI
             if (panel == null)
                 return;
 
-            if (panel.TryGetComponent(out Image image))
+            if (panel.TryGetComponent(out CanvasGroup canvasGroup))
             {
-                image.color = new Color(image.color.r, image.color.g, image.color.b, 0f);
-                image.raycastTarget = true;
-                image.DOFade(1f, animationDuration);
+                canvasGroup.alpha = 0f;
+                canvasGroup.DOFade(1f, animationDuration);
+                canvasGroup.interactable = true;
             }
 
             panel.SetActive(true);
@@ -77,13 +77,11 @@ namespace Archaeologist.UI
             if (panel == null)
                 return;
 
-            if (panel.TryGetComponent(out Image image))
+            if (panel.TryGetComponent(out CanvasGroup canvasGroup))
             {
-                image.DOFade(0f, animationDuration).onComplete += () => panel.SetActive(false);
-                image.raycastTarget = false;
+                canvasGroup.DOFade(0f, animationDuration).OnComplete(() => panel.SetActive(false));
+                canvasGroup.interactable = false;
             }
-
-            panel.SetActive(false);
         }
 
         private void RotateRestartButton(float duration)
