@@ -6,6 +6,7 @@ namespace Archaeologist.Gameplay
 {
     public class Treasure : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
     {
+        [Range(0, 100)]
         [SerializeField] int reward = 1;
 
         public int Reward => reward;

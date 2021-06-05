@@ -10,8 +10,10 @@ namespace Archaeologist.Gameplay
     [RequireComponent(typeof(Button))]
     public class Cell : MonoBehaviour, IPointerClickHandler
     {
+        [Range(1, 5)]
         [SerializeField] int maxDepth = 3;
-        [SerializeField] float animationDuration = 1f;
+        [Range(0f, 2f)]
+        [SerializeField] float animationDuration = 0.2f;
 
         [Header("Colors")]
         [SerializeField] Color groundColor = Color.green;

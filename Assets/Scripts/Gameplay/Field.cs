@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Archaeologist.Gameplay
 {
@@ -9,9 +8,8 @@ namespace Archaeologist.Gameplay
     {
         [Header("General")]
         [SerializeField] MatchController controller = null;
-        [SerializeField] GameObject dropZone = null;
+        [SerializeField] DropZone dropZone = null;
         [SerializeField] RectTransform canvas = null;
-        [SerializeField] GraphicRaycaster graphicRaycaster = null;
         [SerializeField] Vector2 size = new Vector2(10, 10);
 
         [Header("Cells")]
@@ -21,6 +19,7 @@ namespace Archaeologist.Gameplay
         [Header("Treasures")]
         [SerializeField] Transform treasureRoot = null;
         [SerializeField] Treasure treasurePrefab = null;
+        [Range(0f, 1f)]
         [SerializeField] float treasureSpawnRate = 0.1f;
 
         public bool IsPlayerCanDig => Player.Shovels > 0;
@@ -66,12 +65,18 @@ namespace Archaeologist.Gameplay
         private void Clear()
         {
             foreach (Cell child in cells)
-                Destroy(child.gameObject);
+            {
+                try { Destroy(child.gameObject); }
+                catch { }
+            }
 
             cells.Clear();
 
             foreach (Treasure child in treasures)
-                Destroy(child.gameObject);
+            {
+                try { Destroy(child.gameObject); }
+                catch { }
+            }
 
             treasures.Clear();
         }
@@ -90,19 +95,11 @@ namespace Archaeologist.Gameplay
 
         private void OnTreasureDragEnded(PointerEventData eventData, Treasure treasure)
         {
-            var results = new List<RaycastResult>();
-            graphicRaycaster.Raycast(eventData, results);
+            if (dropZone.IsPointerReleasedOver(eventData) == false)
+                return;
 
-            foreach (var result in results)
-            {
-                if (result.gameObject == dropZone)
-                {
-                    Destroy(treasure.gameObject);
-                    Player.IncreaseScore(treasure.Reward);
-
-                    return;
-                }
-            }
+            Destroy(treasure.gameObject);
+            Player.IncreaseScore(treasure.Reward);
         }
 
         private void SpawnTreasure(Transform parent)

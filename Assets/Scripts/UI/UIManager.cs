@@ -1,5 +1,4 @@
 ﻿using DG.Tweening;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +14,8 @@ namespace Archaeologist.UI
         [SerializeField] GameObject victoryPanel = null;
         [SerializeField] GameObject defeatPanel = null;
         [SerializeField] GameObject imageButtonRestart = null;
-        [SerializeField] float animationDuration = 0.2f;
+        [Range(0f, 2f)]
+        [SerializeField] float animationDuration = 0.3f;
 
         private GameObject lastPanel;
 
@@ -72,24 +72,18 @@ namespace Archaeologist.UI
             lastPanel = panel;
         }
 
-        private IEnumerator HidePanel(GameObject panel)
+        private void HidePanel(GameObject panel)
         {
-            if (panel)
+            if (panel == null)
+                return;
+
+            if (panel.TryGetComponent(out Image image))
             {
-                if (panel.TryGetComponent(out Image image))
-                {
-                    image.DOFade(0f, animationDuration);
-                    image.raycastTarget = false;
-
-                    yield return new WaitForSeconds(animationDuration);
-                }
-                else
-                {
-                    yield return new WaitForSeconds(0f);
-                }
-
-                panel.SetActive(false);
+                image.DOFade(0f, animationDuration).onComplete += () => panel.SetActive(false);
+                image.raycastTarget = false;
             }
+
+            panel.SetActive(false);
         }
 
         private void RotateRestartButton(float duration)
