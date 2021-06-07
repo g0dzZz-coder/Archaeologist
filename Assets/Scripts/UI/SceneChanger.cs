@@ -1,20 +1,22 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Archaeologist.UI
 {
     using Core;
 
-    [RequireComponent(typeof(Animator))]
     public class SceneChanger : MonoBehaviour
     {
-        private static Animator Animator = null;
         private static string SceneToLoad = string.Empty;
-        private static readonly int FadeOut = Animator.StringToHash("FadeOut");
+
+        [SerializeField] CanvasGroup canvasGroup = null;
+        [Range(0f, 2f)]
+        [SerializeField] float duration = 0.5f;
 
         private void Awake()
         {
-            Animator = GetComponent<Animator>();
+            PlayFadeInAnimation();
         }
 
         private void OnEnable()
@@ -30,11 +32,7 @@ namespace Archaeologist.UI
         public void FadeToLevel(string newScene)
         {
             SceneToLoad = newScene;
-
-            if (Animator == null)
-                return;
-
-            Animator.SetTrigger(FadeOut);
+            PlayFadeOutAnimation();
         }
 
         public void OnFadeComplete()
@@ -43,6 +41,29 @@ namespace Archaeologist.UI
                 return;
 
             SceneManager.LoadSceneAsync(SceneToLoad);
+        }
+
+        private void PlayFadeInAnimation()
+        {
+            if (canvasGroup == null)
+                return;
+
+            canvasGroup.alpha = 1f;
+            canvasGroup.DOFade(0f, duration);
+        }
+
+        private void PlayFadeOutAnimation()
+        {
+            if (canvasGroup == null)
+                return;
+
+            canvasGroup.DOFade(1f, duration).OnComplete(() => OnFadeComplete());
+        }
+
+        private void OnValidate()
+        {
+            if (canvasGroup == null)
+                Debug.LogError($"[{nameof(SceneChanger)}] CanvasGroup is empty!");
         }
     }
 }

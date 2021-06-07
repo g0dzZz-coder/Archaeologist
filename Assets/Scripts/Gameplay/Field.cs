@@ -20,7 +20,7 @@ namespace Archaeologist.Gameplay
         [SerializeField] Transform treasureRoot = null;
         [SerializeField] Treasure treasurePrefab = null;
         [Range(0f, 1f)]
-        [SerializeField] float treasureSpawnRate = 0.1f;
+        [SerializeField] float treasureSpawnRate = 0.2f;
 
         private bool IsPlayerCanDig => Player.Shovels > 0;
 

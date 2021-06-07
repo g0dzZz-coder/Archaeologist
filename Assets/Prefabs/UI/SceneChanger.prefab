@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1656118432199754331}
   - component: {fileID: 8919916395033066471}
-  - component: {fileID: 1656118432199754330}
   m_Layer: 0
   m_Name: SceneChanger
   m_TagString: Untagged
@@ -45,25 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 580d511f5d18de34596b6cf714e8cde2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &1656118432199754330
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1656118432199754325}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f46a45b3fe10b1b4eadc5088473e9542, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  canvasGroup: {fileID: 5902041916365638494}
+  duration: 0.5
 --- !u!1 &1656118432936058280
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,6 +58,7 @@ GameObject:
   - component: {fileID: 1656118432936058284}
   - component: {fileID: 1656118432936058287}
   - component: {fileID: 1656118432936058286}
+  - component: {fileID: 5902041916365638494}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -164,6 +147,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &5902041916365638494
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656118432936058280}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1656118433615865804
 GameObject:
   m_ObjectHideFlags: 0

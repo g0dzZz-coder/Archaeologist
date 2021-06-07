@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 1971097609653795625}
   - component: {fileID: 1971097609653795620}
   - component: {fileID: 1971097609653795627}
-  - component: {fileID: 1971097609653795626}
+  - component: {fileID: 9115291443111250381}
+  - component: {fileID: 7882089164421306927}
   m_Layer: 0
   m_Name: Treasure
   m_TagString: Untagged
@@ -59,7 +60,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971097609653795624}
   m_CullTransparentMesh: 1
---- !u!114 &1971097609653795626
+--- !u!114 &9115291443111250381
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -81,7 +82,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 361cdd31da0145443ac5452f3daa4ccb, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -89,3 +90,14 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!210 &7882089164421306927
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971097609653795624}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 2

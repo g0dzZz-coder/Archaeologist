@@ -1,6 +1,5 @@
 ﻿using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Archaeologist.UI
 {
@@ -8,7 +7,7 @@ namespace Archaeologist.UI
     using Gameplay;
     using Utils;
 
-    public class UIManager : MonoBehaviour
+    public class GameUI : MonoBehaviour
     {
         [SerializeField] MatchController matchController = null;
         [SerializeField] GameObject victoryPanel = null;
