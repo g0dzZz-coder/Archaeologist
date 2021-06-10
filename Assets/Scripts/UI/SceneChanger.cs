@@ -8,11 +8,11 @@ namespace Archaeologist.UI
 
     public class SceneChanger : MonoBehaviour
     {
-        private static string SceneToLoad = string.Empty;
-
         [SerializeField] CanvasGroup canvasGroup = null;
         [Range(0f, 2f)]
         [SerializeField] float duration = 0.5f;
+
+        private string sceneToLoad = string.Empty;
 
         private void Awake()
         {
@@ -31,16 +31,16 @@ namespace Archaeologist.UI
 
         public void FadeToLevel(string newScene)
         {
-            SceneToLoad = newScene;
+            sceneToLoad = newScene;
             PlayFadeOutAnimation();
         }
 
         public void OnFadeComplete()
         {
-            if (string.IsNullOrWhiteSpace(SceneToLoad))
+            if (string.IsNullOrWhiteSpace(sceneToLoad))
                 return;
 
-            SceneManager.LoadSceneAsync(SceneToLoad);
+            SceneManager.LoadSceneAsync(sceneToLoad);
         }
 
         private void PlayFadeInAnimation()
